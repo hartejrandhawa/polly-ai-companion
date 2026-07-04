@@ -1,0 +1,29 @@
+# build artifacts
+/build/
+/cmake-build-default/
+cmake/build/
+
+# compiled binaries
+/Polly
+/SpeechToText
+
+# vendored third-party libraries
+webui/graphics/three.js-master/
+libs/portaudio/
+
+# node
+node_modules/
+
+# generated docs
+HtmlDoxygen/
+
+# OS/IDE
+.DS_Store
+.vscode/
+
+# vendored third-party library (duplicate of include/nlohmann/json.hpp)
+src/nlohmann/
+
+# stray files
+.Rhistory
+src/weather_program

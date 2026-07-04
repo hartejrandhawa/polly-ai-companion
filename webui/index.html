@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>POLLY</title>
+    <style>
+        body { margin: 0; }
+        #output { color: neon; position: absolute; top: 30px; width: 100%; text-align: center; color: #39ff14}
+        #inputBox { position: absolute; bottom: 40px; width: 100%; text-align: center; font-size: 22px}
+        input { width: 30%; }
+    </style>
+</head>
+<body>
+    <div id="scene-container"></div>
+    
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "./graphics/three.js-master/build/three.module.js",
+                "three/examples/jsm/loaders/GLTFLoader": "./graphics/three.js-master/examples/jsm/loaders/GLTFLoader.js"
+            }
+        }
+    </script>
+    <script>
+        const socket = new WebSocket('ws://localhost:8080/ws');
+
+        socket.onopen = function(e) {
+          console.log("Connection established!");
+        };
+
+        socket.onmessage = function(event) {
+          const data = JSON.parse(event.data);
+          document.getElementById('output').textContent = data.response;
+          if (data.emotion) {
+             changeAnimationClip(data.emotion);
+          }
+          // Handle the change in emotion here
+        };
+
+        socket.onclose = function(event) {
+          if (event.wasClean) {
+            console.log(`Connection closed cleanly, code=${event.code}`);
+          } else {
+            console.log('Connection died');
+          }
+        };
+
+        socket.onerror = function(error) {
+          console.log(`[error] ${error.message}`);
+        };
+
+        function sendInput() {
+            const inputText = document.getElementById('inputText').value;
+            console.log("Sending:", inputText); //debugging
+            socket.send(inputText);
+        }
+    </script>
+    <script type="module" src="main.js"></script>
+    <div id="output"></div>
+    <div id="inputBox">
+        <input type="text" id="inputText" placeholder="Type here...">
+        <button onclick="sendInput()">Send</button>
+    </div>
+    
+</body>
+</html>
