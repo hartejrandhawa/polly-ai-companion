@@ -1,5 +1,3 @@
-// SAAD MAHMOOD
-
 #include "../include/polly/Polly.h"
 #include "crow.h"
 #include <algorithm>
