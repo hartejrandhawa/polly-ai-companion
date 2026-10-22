@@ -1,4 +1,3 @@
-//SAAD MAHMOOD
 #include "../include/polly/LLMProcessing.h"
 #include <iostream>
 #include <cstdio>
