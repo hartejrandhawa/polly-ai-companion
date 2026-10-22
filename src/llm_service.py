@@ -1,5 +1,4 @@
-# we need to autostart this for LLMProcessing.cpp to work properly
-#SAAD MAHMOOD
+# might need to autostart this for LLMProcessing.cpp to work properly
 
 import flask
 from flask import request, jsonify
