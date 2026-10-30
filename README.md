@@ -82,12 +82,3 @@ you type your message into the box and press "SEND" ... only press once or it wi
 
 
 
-CURRENT ISSUES:
-
--STT is not properly integrated..ideally there should be a button in the webUI that you will click and then it will start listening
--no animation for "love", maybe add heart emojis or <3 in the text section (or add another text section) and implement how the "THINKING" message is implemented
--LLM finetuning (play around with the paramaters in llm_service.py)
-
-
-
-
