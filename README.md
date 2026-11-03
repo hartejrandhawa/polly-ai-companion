@@ -78,7 +78,7 @@ _  __/  _ \_  ___/  __/_  /__  __ \_  __ `/
 / /_ /  __/(__  )/ /_ _  / _  / / /  /_/ /
 \__/ \___//____/ \__/ /_/  /_/ /_/_\__, /
                                   /____/
-you type your message into the box and press "SEND" ... only press once or it will loop
+You type your message into the box and press "SEND" ... only press once or it will loop
 
 
 
