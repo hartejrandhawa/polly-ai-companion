@@ -80,5 +80,12 @@ _  __/  _ \_  ___/  __/_  /__  __ \_  __ `/
                                   /____/
 You type your message into the box and press "SEND" ... only press once or it will loop
 
+API key: speech-to-text uses the Google Cloud Speech API. Set your own key in the
+terminal where you run ./Polly before starting it:
+
+    export GOOGLE_STT_API_KEY=your_key_here
+
+(The standalone src/Weather.cpp test reads TOMORROW_API_KEY the same way.)
+
 
 
