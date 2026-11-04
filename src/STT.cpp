@@ -6,13 +6,21 @@
 #include "portaudio.h"
 #include <curl/curl.h>
 #include <limits>
+#include <cstdlib>
 #include "nlohmann/json.hpp"
 
 const int STT::kSampleRate = 44100;
 const int STT::kFramesPerBuffer = 256;
 const int STT::kNumChannels = 1;
 const int STT::kRecordTimeSecs = 5;
-const std::string apikey = "AIzaSyC7nOfOCovoNDIT8bzIdFh_X9n0lSWdnt4";
+
+// The Google Speech-to-Text API key is read from the environment so it is
+// never committed to the repo. Set it before running: export GOOGLE_STT_API_KEY=...
+static std::string loadApiKey() {
+    const char *key = std::getenv("GOOGLE_STT_API_KEY");
+    return key ? std::string(key) : std::string();
+}
+const std::string apikey = loadApiKey();
 
 // Define the WAV file header structure
 struct WAVHeader {
@@ -132,6 +140,11 @@ std::vector<int16_t> STT::RecordAudio(int recordTimeSecs) {
 
 std::string STT::run() {
     std::string transcribedText;
+
+    if (apikey.empty()) {
+        std::cerr << "GOOGLE_STT_API_KEY is not set. Export it before running Polly." << std::endl;
+        return "Error: GOOGLE_STT_API_KEY is not set";
+    }
 
     PaError err = Pa_Initialize();
     curl_global_init(CURL_GLOBAL_ALL);
