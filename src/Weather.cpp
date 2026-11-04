@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 #include <nlohmann/adl_serializer.hpp>
@@ -14,7 +15,14 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* out
 
 int main() {
     // Step 1: Choose a Weather API Provider
-    std::string api_key = "Cb4xlZWAYgewVwOlhEAbVmnCgOIDxMOP";
+    // The Tomorrow.io API key is read from the environment so it is never
+    // committed to the repo. Set it before running: export TOMORROW_API_KEY=...
+    const char* env_key = std::getenv("TOMORROW_API_KEY");
+    if (!env_key || std::string(env_key).empty()) {
+        std::cerr << "TOMORROW_API_KEY is not set. Export it before running." << std::endl;
+        return 1;
+    }
+    std::string api_key = env_key;
     std::string lat = "42.3478";
     std::string lon = "-71.0466";
 
